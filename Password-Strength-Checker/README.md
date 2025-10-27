@@ -1,28 +1,38 @@
 # 🔐 Password Strength Checker
 
-A simple and interactive Password Strength Checker built using **HTML, CSS, and JavaScript**, designed with a light purple UI theme.
+A simple and effective Password Strength Checker built using **HTML, CSS, and JavaScript**.  
+It evaluates password security in real-time and provides instant feedback to the user.
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
-✅ Real-time strength detection  
-✅ Shows: Weak → Medium → Good → Strong  
-✅ Eye icon toggle for show/hide password  
-✅ Responsive UI  
-
----
-
-## 🔤 Sample Passwords for Testing
-
-| Strength | Example Password |
-|---------|------------------|
-| Weak | abc123 |
-| Medium | abc123XYZ |
-| Good | Abc@12345 |
-| Strong | R@nd0m$Pass2025! |
+- ✅ Real-time password strength detection  
+- 👁️ Show / Hide password toggle  
+- 🎯 Checks for:
+  - Lowercase letters  
+  - Uppercase letters  
+  - Numbers  
+  - Special characters  
+  - Minimum length requirement  
+- 🟣 Light purple themed UI  
+- 📱 Fully responsive design  
 
 ---
 
-## 📁 Project Structure
+## 🛠️ Technologies Used
 
+| Technology | Purpose |
+|-----------|---------|
+| HTML      | Structure |
+| CSS       | Styling (purple theme) |
+| JavaScript | Password logic & strength indicator |
+
+---
+
+## 🚀 How to Run
+
+1. Clone the repository:
+   ```bash
+   git clone <repo-url>
+git
