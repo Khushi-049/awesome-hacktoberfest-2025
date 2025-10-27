@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #f3e5f5, #d1c4e9);
+}
+
+.container {
+    width: 360px;
+    padding: 28px;
+    background: #ffffffcc;
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(107, 70, 193, 0.25);
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #5e35b1;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    padding: 12px 40px 12px 14px;
+    font-size: 16px;
+    border: 2px solid #b39ddb;
+    border-radius: 12px;
+    transition: 0.3s;
+    outline: none;
+}
+
+input:focus {
+    border-color: #7e57c2;
+    box-shadow: 0 0 8px rgba(126, 87, 194, 0.4);
+}
+
+.eye {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    color: #7e57c2;
+}
+
+#strengthText {
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: #4a148c;
+}
+
+#strengthBar {
+    height: 12px;
+    width: 100%;
+    background: #e0e0e0;
+    border-radius: 6px;
+    transition: 0.35s;
+}
