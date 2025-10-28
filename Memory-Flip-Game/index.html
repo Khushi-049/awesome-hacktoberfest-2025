@@ -1,24 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memory Flip Game</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Card Flip — Memory Match (Mixed)</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <main class="app">
+    <header>
+      <h1>💜 Card Flip — Memory Match</h1>
+      <p class="lead">Mixed images + emoji pairs — Hint, Restart, Moves & Score</p>
+    </header>
 
-  <h1>🎯 Memory Flip Game</h1>
-  <h2>Match the Pairs!</h2>
+    <section class="controls">
+      <button id="hintBtn" class="btn">💡 Hint</button>
+      <button id="restartBtn" class="btn">🔄 Restart</button>
+      <div class="status">
+        <span>Moves: <strong id="moves">0</strong></span>
+        <span>Matches: <strong id="matches">0</strong>/4</span>
+      </div>
+    </section>
 
-  <div class="score-board">
-    Moves: <span id="moves">0</span>
-  </div>
+    <section class="board-wrap">
+      <div id="board" class="board" aria-live="polite"></div>
+    </section>
 
-  <div class="game-container" id="game"></div>
+    <!-- End overlay -->
+    <div id="endOverlay" class="overlay hidden" role="dialog" aria-modal="true">
+      <div class="overlay-card">
+        <h2>🎉 You finished!</h2>
+        <p id="endText">You matched <strong id="endMatches">4</strong> pairs in <strong id="endMoves">0</strong> moves.</p>
+        <div class="overlay-actions">
+          <button id="overlayRestart" class="btn">Play Again</button>
+        </div>
+      </div>
+    </div>
 
-  <button id="restartBtn">🔄 Restart Game</button>
+   
+  </main>
 
   <script src="script.js"></script>
 </body>
 </html>
+

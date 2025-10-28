@@ -1,58 +1,117 @@
-const emojis = ["🐼","🐸","🐯","🍉","🍓","🐶","🍇","🐱"];
-let cards = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
-
-const game = document.getElementById("game");
-const movesEl = document.getElementById("moves");
+const board = document.getElementById("board");
+const movesText = document.getElementById("moves");
+const matchesText = document.getElementById("matches");
+const hintBtn = document.getElementById("hintBtn");
 const restartBtn = document.getElementById("restartBtn");
+const overlayRestart = document.getElementById("overlayRestart");
+const endOverlay = document.getElementById("endOverlay");
+const endMatches = document.getElementById("endMatches");
+const endMoves = document.getElementById("endMoves");
 
-let moveCount = 0;
-let flippedCard = null;
-let lockBoard = false;
+let symbols = ["🍎", "🍌", "🍪", "🍇"];
+let cards = [];
+let first = null;
+let second = null;
+let moves = 0;
+let matches = 0;
+let lock = false;
+let hintActive = false;
 
-function createBoard() {
-  game.innerHTML = "";
-  cards.forEach(emoji => {
+function shuffle(arr) {
+  return arr.sort(() => Math.random() - 0.5);
+}
+
+function initializeGame() {
+  lock = false;
+  moves = 0;
+  matches = 0;
+  movesText.textContent = moves;
+  matchesText.textContent = matches;
+
+  endOverlay.classList.add("hidden");
+  board.innerHTML = "";
+
+  cards = shuffle([...symbols, ...symbols]);
+
+  cards.forEach(symbol => {
     const card = document.createElement("div");
     card.classList.add("card");
-    card.innerHTML = `
-      <div class="front">❓</div>
-      <div class="back">${emoji}</div>
-    `;
+    card.dataset.value = symbol;
     card.addEventListener("click", flipCard);
-    game.appendChild(card);
+    board.appendChild(card);
   });
 }
 
 function flipCard() {
-  if (lockBoard || this.classList.contains("flip")) return;
-  
-  this.classList.add("flip");
-  
-  if (!flippedCard) {
-    flippedCard = this;
+  if (lock || this.classList.contains("flipped")) return;
+
+  this.classList.add("flipped");
+  this.textContent = this.dataset.value;
+
+  if (!first) {
+    first = this;
+    return;
+  }
+
+  second = this;
+  moves++;
+  movesText.textContent = moves;
+  lock = true;
+
+  if (first.dataset.value === second.dataset.value) {
+    first.classList.add("matched");
+    second.classList.add("matched");
+    matches++;
+    matchesText.textContent = matches;
+
+    first = second = null;
+    lock = false;
+
+    if (matches === symbols.length) showWin();
   } else {
-    moveCount++;
-    movesEl.textContent = moveCount;
-    
-    if (this.innerHTML === flippedCard.innerHTML) {
-      flippedCard = null;
-    } else {
-      lockBoard = true;
-      setTimeout(() => {
-        this.classList.remove("flip");
-        flippedCard.classList.remove("flip");
-        flippedCard = null;
-        lockBoard = false;
-      }, 900);
-    }
+    setTimeout(() => {
+      first.classList.remove("flipped");
+      second.classList.remove("flipped");
+      first.textContent = "";
+      second.textContent = "";
+      first = second = null;
+      lock = false;
+    }, 700);
   }
 }
 
-restartBtn.addEventListener("click", () => {
-  moveCount = 0;
-  movesEl.textContent = 0;
-  cards.sort(() => Math.random() - 0.5);
-  createBoard();
-});
+function showHint() {
+  if (hintActive || lock) return;
 
-createBoard();
+  hintActive = true;
+  lock = true;
+
+  const allCards = document.querySelectorAll(".card:not(.matched)");
+  allCards.forEach(c => {
+    c.classList.add("flipped");
+    c.textContent = c.dataset.value;
+  });
+
+  setTimeout(() => {
+    allCards.forEach(c => {
+      if (!c.classList.contains("matched")) {
+        c.classList.remove("flipped");
+        c.textContent = "";
+      }
+    });
+    hintActive = false;
+    lock = false;
+  }, 2000);
+}
+
+function showWin() {
+  endOverlay.classList.remove("hidden");
+  endMatches.textContent = matches;
+  endMoves.textContent = moves;
+}
+
+hintBtn.addEventListener("click", showHint);
+restartBtn.addEventListener("click", initializeGame);
+overlayRestart.addEventListener("click", initializeGame);
+
+initializeGame();
