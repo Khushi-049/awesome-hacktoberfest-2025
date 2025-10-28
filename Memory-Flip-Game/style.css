@@ -19,12 +19,14 @@ body {
   width: 100%;
   max-width: 480px;
   text-align: center;
-  color: #4a0066;
+  color: #4a0066;  
+  
 }
 
 h1 {
-  font-size: 1.65rem;
-  margin-bottom: 8px;
+  
+  font-size: 35px;
+  margin-bottom: 30px;
 }
 
 .lead {
